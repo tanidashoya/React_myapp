@@ -1,6 +1,8 @@
-
+//親が状態とロジックを持つ
+//returnによってReactに渡される
 import './App.css'
 import Button from './components/Button/Button'
+import Display from './components/Display/Display'
 import {useState} from 'react';
 
 function App() {
@@ -10,17 +12,17 @@ function App() {
   // - 配列インデックス1: setCount（状態を更新する関数）
   const [count, setCount] = useState(0);
 
-  // ボタンクリック時に実行される処理を定義
+  // ボタンクリック時の処理を定義
   const handleClick = () => {
-    // setCount（配列インデックス1）を呼び出すことで：
-    // 1. countの値を更新（0 → 1 → 2 → ...）
-    // 2. コンポーネントの再レンダリングをトリガー
-    // 3. 画面に新しい値が反映される
+    // setCount関数の仕組み：
+    // - setCountはReactが自動的に提供する状態更新専用関数
+    // - setCount(処理内容)の形で、どのような処理をするかを呼び出し時に定義
+    // - 処理内容の結果が新しい状態値として適用される
     
-    // setCountの引数に渡した式（count + 1）が新しい状態値として適用される
-    // つまり、現在のcountの値に1を足した結果が、次のcountの状態になる
+    // 例：count + 1の計算結果が新しいcountの値になる
     setCount(count + 1);
   }
+
 
   return (
     //returnの中で複数の要素を返す場合は、React.Fragmentで囲む
@@ -35,9 +37,9 @@ function App() {
         disabled={false}     // ボタンを有効状態に設定
         onClick={handleClick} // ボタンクリック時の処理をhandleClick関数に設定
       >
-        <span>カウント：{count}</span>
+        ボタン
       </Button>
-
+      <Display count={count}/>
     </>
   )
 }
